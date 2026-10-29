@@ -6,7 +6,7 @@
     # ansible-playbook roboshop.yaml -e "action=delete"
     instances: ["mongodb", "redis", "mysql", "rabbitmq"]
     action: create
-    domain_name: teja97s.store
+    domain_name: daws92s.store
     ami_id: ami-0055977a6e828a4f4
   tasks:
   - name: create ec2 instance
@@ -22,10 +22,9 @@
     when: action == "create"
     register: ec2_output
 
-
-  #- name: print ec2 creation 
-  #  debug:
-   #   msg: "{{ ec2_output }}"   
+  # - name: print ec2 creation output
+  #   debug:
+  #     msg: "{{ ec2_output }}"
 
   - name: create R53 record
     amazon.aws.route53:
@@ -39,9 +38,8 @@
     loop: "{{ ec2_output.results }}"
     when: action == "create"
 
-
-  - name: delete r53 record
-    amazon.aws.rote53:
+  - name: delete R53 records
+    amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
       record: "{{ item }}.{{ domain_name }}"
@@ -57,4 +55,4 @@
       region: us-east-1
       wait: false
     loop: "{{ instances }}"
-    when: action == "delete"
+    when: action == "delete
