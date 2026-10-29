@@ -1,0 +1,35 @@
+- name: configure mongodb server
+  hosts: mongodb
+  become: yes
+  tasks: 
+  - name: copy mongo repo
+    copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.rep
+
+  # - name: test the inventory variable
+  #   debug:
+  #     msg: "{{ app_name }}"
+
+  - name: install mongodb server
+    package: 
+     name: mongodb_org
+     state: present
+
+  - name: install enable server
+    service: 
+     name: mongod
+     state: started
+     enable: yes
+
+  - name: allow remote connections
+    replace: 
+      path: /etc/mongod.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+
+  - name: restart mongod
+    service:
+      name: mongod
+      state: restarted
+    
