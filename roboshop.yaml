@@ -1,4 +1,4 @@
-- name: create ec2 instance and r53 recprs
+- name: create ec2 instance and r53 records
   hosts: local
   connection: local
   vars:
