@@ -13,7 +13,7 @@
 
   - name: install mongodb server
     package: 
-     name: mongodb_org
+     name:  mongodb-org
      state: present
 
   - name: install enable server
