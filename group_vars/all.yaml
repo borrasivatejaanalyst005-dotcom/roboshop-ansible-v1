@@ -4,3 +4,7 @@ mongodb_host: mongodb.teja97s.store
 redis_host: redis.teja97s.store
 mysql_host: mysql.teja97s.store
 rabbitmq_host: rabbitmq.teja97s.store
+user_host: user.teja97s.store
+cart_host: cart.teja97s.store
+shipping_host: shipping.teja97s.store
+payment_host: payment.teja97s.store
